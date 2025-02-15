@@ -1,0 +1,19 @@
+table {
+  table-layout: fixed;
+  width: 1250px;
+  height: 800px;
+}
+
+table td {
+  height: 100px;
+  position: relative;
+}
+
+table td:before {
+  content: attr(data-day);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: yellow;
+}

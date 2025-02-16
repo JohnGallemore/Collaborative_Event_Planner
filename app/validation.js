@@ -8,7 +8,7 @@ const user = null
 const is_new_user = false
 
 //Handle the mongoDB stuff
-const { MongoClient, ServerApiVersion } = require('mongodb')
+const { MongoClient, ServerApiVersion } = NodeJS.Require('mongodb')
 const uri = "mongodb+srv://AdminUser:administration@maincluster.1bujy.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster"
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version

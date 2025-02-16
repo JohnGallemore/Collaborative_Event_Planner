@@ -1,6 +1,15 @@
+//Record input from the html forms
+const form = document.getElementById('form')
+const username_input = document.getElementById('username-input')
+const password_input = document.getElementById('password-input')
+const confirm_password_input = document.getElementById('confirm-password-input')
+const error_messages = document.getElementById('errors')
+const user = null
+const is_new_user = false
+
 //Handle the mongoDB stuff
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://AdminUser:<db_password>@maincluster.1bujy.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster";
+const { MongoClient, ServerApiVersion } = require('mongodb')
+const uri = "mongodb+srv://AdminUser:administration@maincluster.1bujy.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster"
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -9,20 +18,7 @@ const client = new MongoClient(uri, {
     strict: true,
     deprecationErrors: true,
   }
-});
-
-const db = client.db("EventPlannerDatabase")
-const users_coll = db.collection("users")
-
-
-//Record input from the html forms
-const form = document.getElementById('form')
-const username_input = document.getElementById('username-input')
-const password_input = document.getElementById('password-input')
-const confirm_password_input = document.getElementById('confirm-password-input')
-const error_messages = document.getElementById('errors')
-const user = null;
-const is_new_user = false
+})
 
 form.addEventListener('submit', (e) => {
     let errors = []
@@ -77,11 +73,22 @@ function getLoginErrors(username, password)
     return errors
 }
 
+async function connectToDB(){
+    try{
+        await client.connect()
+        console.log("Successfully connected to database.")
+    }
+    catch(err){
+        console.error("Failed to connect to database. ", err)
+    }
+}
+
 //Function to place a new user into the database.
 async function insertUser(data){
     try{
-        const insterted = await users_coll.insertOne(data)
-        console.log('Inserted successfully, id: ${inserted.insertedId}')
+        const db = client.db("EventPlannerDatabase")
+        const users_coll = db.collection("users")
+        await users_coll.insertOne(data)
     }
     catch(err){
         console.error("Failed insertion", err)
@@ -102,7 +109,8 @@ async function closeClient()
 
 if(new_user)
 {
-    insertUser(user);
+    connectToDB()
+    insertUser(user)
 }
 
 closeClient()

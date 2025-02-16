@@ -8,18 +8,22 @@
         <title>Create Your Profile</title>
     </head>
     <body>
-        <div class="form-container"></div>
-        <form id="form">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username-input" placeholder="Username" required>
+        <h1>Sign Up</h1>
+        <p id="errors"></p>
+        <div>
+            <form id="form">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username-input" placeholder="Username" required>
 
-            <label for="password">Password</label>
-            <input type="text" name="password" id="password-input" placeholder="Password" required>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password-input" placeholder="Password" required>
 
-            <label for="confirm-password">Confirm Password</label>
-            <input type="text" name="confirm-password" id="confirm-password-input" placeholder="Confirm Password" required>
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="confirm-password" id="confirm-password-input" placeholder="Confirm Password" required>
 
-            <button type="button">Sign Up</button>
-        </form>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <p>Already have an account? <a href="login.html">Login.</p>
     </body>
 </html>

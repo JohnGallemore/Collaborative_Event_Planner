@@ -1,19 +1,11 @@
-.form-container{
-    width: 4rem;
-    margin:auto;
-    background-color: white;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: rgb(0, 0, 0,);
-}
-
 form{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap:10px;
 }
 
-input[type="text"]{
+input[type="text"],
+input[type="password"]{
     width: 100%;
     padding: 15px;
     border: 1px solid black;
@@ -21,7 +13,7 @@ input[type="text"]{
     font-size: 15px;
 }
 
-button[type="button"]{
+button[type="submit"]{
     width: 100%;
     padding: 15px;
     border: 1px solid black;
@@ -29,13 +21,17 @@ button[type="button"]{
     font-size: 15px;
     background-color: rgb(26, 71, 186);
     color: white;
-    transition: 0.5s ease;
+    transition: 0.15s ease;
 }
 
-button[type="button"]:hover{ 
+button[type="submit"]:hover{ 
     background-color: rgb(60, 99, 197);   
 }
 
-button[type="button"]:active{   
+button[type="submit"]:active{   
     background-color: rgb(1, 56, 196);  
+}
+
+#errors{
+    color: red;
 }

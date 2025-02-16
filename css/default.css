@@ -1,0 +1,16 @@
+:root{
+    --headColor: rgb(10, 59, 144);
+    --backColor: rgb(0, 166, 243);
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--backColor);
+}
+
+header{
+    background-color: var(--headColor);
+    font-family: Arial, Helvetica, sans-serif;
+}

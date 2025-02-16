@@ -65,3 +65,22 @@ if(is_new_user)
 {
     db_handle.insert(user)
 }
+
+document.addEventListener('DOMContentLoaded',function(){
+
+    var params=(0||'defaultSubmit')+'='+'submit';console.log(params);
+    var page=window.location.href;
+    sendRequest(params,
+                ('get'.toLowerCase()=='get'?1:2), 
+                autoPageAjax_cb,
+                (U_R_L)
+                );
+    
+        const COLUMN_DAYMONTH_START = 2;
+        const MAXIMUM_DAYMONTH = 32;
+        testSetCalendarDates(COLUMN_DAYMONTH_START, 
+                             MAXIMUM_DAYMONTH,
+                             DEBUG_GLOBAL);
+    //	document.getElementsByName('NOTANAME')[0].addEventListener('click',function(event){event.preventDefault();});
+    
+    });

@@ -1,6 +1,6 @@
 :root{
-    --headColor: rgb(10, 59, 144);
-    --backColor: rgb(0, 166, 243);
+    --headColor: rgb(3, 35, 90);
+    --backColor: rgb(255, 255, 255);
 }
 
 body{
@@ -13,4 +13,11 @@ body{
 header{
     background-color: var(--headColor);
     font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 1rem;
+}
+
+nav a{
+    color: white;
+    margin: 0 15px;
 }

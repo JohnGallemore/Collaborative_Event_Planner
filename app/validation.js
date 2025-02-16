@@ -1,31 +1,12 @@
-import {createRequire} from 'node:module'
-
-//Handle the mongoDB stuff
-const { MongoClient, ServerApiVersion } = require('mongodb')
-const uri = "mongodb+srv://AdminUser:administration@maincluster.1bujy.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster"
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-})
-
-const db = client.db("EventPlannerDatabase")
-const users = db.collection("users")
-
 //Record input from the html forms
 const form = document.getElementById('form')
 const username_input = document.getElementById('username-input')
 const password_input = document.getElementById('password-input')
 const confirm_password_input = document.getElementById('confirm-password-input')
 const error_messages = document.getElementById('errors')
+const db_handle = import('./database_handler.js')
 const user = null
 const is_new_user = false
-
-connectToDB();
 
 form.addEventListener('submit', (e) => {
     let errors = []
@@ -34,7 +15,7 @@ form.addEventListener('submit', (e) => {
     if(confirm_password_input)
     {
         //If in create profile
-        errors = getSignUpErrors(username_input.value, password_input.value, confirm_password_input.value)
+        errors = getSignUpErrors(password_input.value, confirm_password_input.value)
         user = {
             name: username_input.value,
             password: password_input.value
@@ -58,7 +39,7 @@ form.addEventListener('submit', (e) => {
 })
 
 //Check for user error in the sign up process
-function getSignUpErrors(username, password, confirmPass)
+function getSignUpErrors(password, confirmPass)
 {
     let errors = []
 
@@ -80,42 +61,7 @@ function getLoginErrors(username, password)
     return errors
 }
 
-
-async function connectToDB(){
-    try{
-        await client.connect()
-        console.log("Successfully connected to database.")
-    }
-    catch(err){
-        console.error("Failed to connect to database. ", err)
-    }
-}
-
-//Function to place a new user into the database.
-async function insertUser(userInfo){
-    try{
-        users.insertOne(userInfo)
-    }
-    catch(err){
-        console.error("Failed insertion", err)
-    }
-}
-
-//Ensures the client is closed at the end of the program.
-async function closeClient()
+if(is_new_user)
 {
-    try{
-        await client.close()
-        console.log("Connection closed successfully")
-    }
-    catch(err){
-        console.error("Failed to close connection", err)
-    }
+    db_handle.insert(user)
 }
-
-if(new_user)
-{
-    insertUser(user)
-}
-
-closeClient()

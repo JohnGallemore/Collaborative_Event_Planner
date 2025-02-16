@@ -12,7 +12,7 @@ const client = new MongoClient(uri, {
 });
 
 const db = client.db("EventPlannerDatabase")
-const users_collection = db.collection("users")
+const users_coll = db.collection("users")
 
 
 //Record input from the html forms
@@ -21,6 +21,8 @@ const username_input = document.getElementById('username-input')
 const password_input = document.getElementById('password-input')
 const confirm_password_input = document.getElementById('confirm-password-input')
 const error_messages = document.getElementById('errors')
+const user = null;
+const is_new_user = false
 
 form.addEventListener('submit', (e) => {
     let errors = []
@@ -30,10 +32,11 @@ form.addEventListener('submit', (e) => {
     {
         //If in create profile
         errors = getSignUpErrors(username_input.value, password_input.value, confirm_password_input.value)
-        const user = {
+        user = {
             name: username_input.value,
             password: password_input.value
         }
+        is_new_user = true
     }
     else
     {
@@ -46,20 +49,17 @@ form.addEventListener('submit', (e) => {
     {
         e.preventDefault()
         error_messages.innerText = errors.join(". ")
+        is_new_user = false
     }
 
 })
 
+//Check for user error in the sign up process
 function getSignUpErrors(username, password, confirmPass)
 {
     let errors = []
 
-    if(username === '' || username == null)
-    {
-        errors.push("Username is required")
-    }
-
-    if(password !== confirmPass)
+    if(password != confirmPass)
     {
         errors.push("Password and Confirmation Password do not match")
     }
@@ -67,6 +67,7 @@ function getSignUpErrors(username, password, confirmPass)
     return errors
 }
 
+//Check for user errors in the login process
 function getLoginErrors(username, password)
 {
     let errors = []
@@ -76,9 +77,10 @@ function getLoginErrors(username, password)
     return errors
 }
 
+//Function to place a new user into the database.
 async function insertUser(data){
     try{
-        const insterted = await users_collection.insertOne(data)
+        const insterted = await users_coll.insertOne(data)
         console.log('Inserted successfully, id: ${inserted.insertedId}')
     }
     catch(err){
@@ -86,6 +88,7 @@ async function insertUser(data){
     }
 }
 
+//Ensures the client is closed at the end of the program.
 async function closeClient()
 {
     try{
@@ -96,4 +99,10 @@ async function closeClient()
         console.error("Failed to close connection", err)
     }
 }
+
+if(new_user)
+{
+    insertUser(user);
+}
+
 closeClient()

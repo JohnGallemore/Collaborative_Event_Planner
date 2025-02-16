@@ -20,6 +20,8 @@ const client = new MongoClient(uri, {
   }
 })
 
+connectToDB();
+
 form.addEventListener('submit', (e) => {
     let errors = []
     
@@ -55,7 +57,7 @@ function getSignUpErrors(username, password, confirmPass)
 {
     let errors = []
 
-    if(password != confirmPass)
+    if(password !== confirmPass)
     {
         errors.push("Password and Confirmation Password do not match")
     }
@@ -73,6 +75,7 @@ function getLoginErrors(username, password)
     return errors
 }
 
+
 async function connectToDB(){
     try{
         await client.connect()
@@ -84,11 +87,11 @@ async function connectToDB(){
 }
 
 //Function to place a new user into the database.
-async function insertUser(data){
+async function insertUser(userInfo){
     try{
         const db = client.db("EventPlannerDatabase")
-        const users_coll = db.collection("users")
-        await users_coll.insertOne(data)
+        const users = db.collection("users")
+        users.insertOne(userInfo)
     }
     catch(err){
         console.error("Failed insertion", err)
@@ -109,7 +112,6 @@ async function closeClient()
 
 if(new_user)
 {
-    connectToDB()
     insertUser(user)
 }
 

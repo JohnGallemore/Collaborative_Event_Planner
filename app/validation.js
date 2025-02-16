@@ -1,3 +1,7 @@
+//Handle the mongoDB stuff
+const { MongoClient, ServerApiVersion } = require('mongodb')
+const uri = "mongodb+srv://AdminUser:administration@maincluster.1bujy.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster"
+
 //Record input from the html forms
 const form = document.getElementById('form')
 const username_input = document.getElementById('username-input')
@@ -7,9 +11,7 @@ const error_messages = document.getElementById('errors')
 const user = null
 const is_new_user = false
 
-//Handle the mongoDB stuff
-const { MongoClient, ServerApiVersion } = import('mongodb')
-const uri = "mongodb+srv://AdminUser:administration@maincluster.1bujy.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster"
+
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {

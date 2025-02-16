@@ -4,11 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" type = "text/css" href = "./css/signIn.css">
+        <script type="text/javascript" src="./app/validation.js" defer></script>
         <title>Create Your Profile</title>
     </head>
     <body>
         <div class="form-container"></div>
-        <form>
+        <form id="form">
             <label for="username">Username</label>
             <input type="text" name="username" id="username-input" placeholder="Username" required>
 
@@ -18,7 +19,7 @@
             <label for="confirm-password">Confirm Password</label>
             <input type="text" name="confirm-password" id="confirm-password-input" placeholder="Confirm Password" required>
 
-            <input type="button" value="Submit">
+            <button type="button">Sign Up</button>
         </form>
     </body>
 </html>

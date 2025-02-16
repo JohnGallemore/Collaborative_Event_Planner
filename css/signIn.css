@@ -10,24 +10,32 @@
 form{
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 input[type="text"]{
     width: 100%;
     padding: 15px;
-    margin-bottom: 30px;
     border: 1px solid black;
     box-sizing: border-box;
     font-size: 15px;
 }
 
-input[type="button"]{
+button[type="button"]{
     width: 100%;
     padding: 15px;
-    margin-bottom: 30px;
     border: 1px solid black;
     box-sizing: border-box;
     font-size: 15px;
     background-color: rgb(26, 71, 186);
     color: white;
+    transition: 0.5s ease;
+}
+
+button[type="button"]:hover{ 
+    background-color: rgb(60, 99, 197);   
+}
+
+button[type="button"]:active{   
+    background-color: rgb(1, 56, 196);  
 }

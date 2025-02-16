@@ -1,3 +1,5 @@
+import {createRequire} from 'node:module'
+
 //Handle the mongoDB stuff
 const { MongoClient, ServerApiVersion } = require('mongodb')
 const uri = "mongodb+srv://AdminUser:administration@maincluster.1bujy.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster"
